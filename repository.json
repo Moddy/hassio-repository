@@ -1,5 +1,5 @@
 {
-    "name": "Bohdans Hass.io Add-ons",
-    "url": "https://github.com/bohdan-s/hassio-repository",
-    "maintainer": "Bohdan https://github.com/bohdan-s"
+    "name": "Bohdans Hass.io Add-ons (with Moddy patches)",
+    "url": "https://github.com/Moddy/hassio-repository",
+    "maintainer": "Moddy https://github.com/Moddy"
   }
