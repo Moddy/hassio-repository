@@ -5,7 +5,7 @@ inverter:
   connection: modbus
   smart_meter: true
   log_console: INFO
-  level: 1
+  level: 2
   # port: 502
   # timeout: 10
   # retries: 3
@@ -24,12 +24,576 @@ exports:
     # topic: "SunGather/{serial_number}"
     homeassistant: True
     ha_sensors:
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Protocol number
+        register: protocol_number
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Protocol version
+        register: protocol_version
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Arm software version
+        register: arm_software_version
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Dsp software version
+        register: dsp_software_version
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: power
+        icon: mdi:solar-power
+        name: Nominal active power
+        register: nominal_active_power
+        sensor_type: sensor
+        state_class: measurement
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Output type
+        register: output_type
+        sensor_type: sensor
+        state_class: total_increasing
       - name: "Daily Generation"
         sensor_type: sensor
         register: daily_power_yields
         device_class: energy
         state_class: total_increasing
         icon: "mdi:solar-power"
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Total power yields
+        register: total_power_yields
+        sensor_type: sensor
+        state_class: total_increasing
+      - name: "Temperature"
+        sensor_type: sensor
+        register: internal_temperature
+        device_class: temperature
+        state_class: measurement
+      - device_class: volts
+        icon: mdi:solar-power
+        name: Mppt 1 voltage
+        register: mppt_1_voltage
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: current
+        icon: mdi:solar-power
+        name: Mppt 1 current
+        register: mppt_1_current
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: power
+        icon: mdi:solar-power
+        name: Total dc power
+        register: total_dc_power
+        sensor_type: sensor
+        state_class: measurement
+      - device_class: volts
+        icon: mdi:solar-power
+        name: Phase a voltage
+        register: phase_a_voltage
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: volts
+        icon: mdi:solar-power
+        name: Phase b voltage
+        register: phase_b_voltage
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: volts
+        icon: mdi:solar-power
+        name: Phase c voltage
+        register: phase_c_voltage
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: current
+        icon: mdi:solar-power
+        name: Total reactive power
+        register: total_reactive_power
+        sensor_type: sensor
+        state_class: measurement
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Power factor
+        register: power_factor
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: frequency
+        icon: mdi:solar-power
+        name: Grid frequency
+        register: grid_frequency
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: duration
+        icon: mdi:solar-power
+        name: Daily running time
+        register: daily_running_time
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: power
+        icon: mdi:solar-power
+        name: Export limit min
+        register: export_limit_min
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: power
+        icon: mdi:solar-power
+        name: Export limit max
+        register: export_limit_max
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: power
+        icon: mdi:solar-power
+        name: Bdc rated power
+        register: bdc_rated_power
+        sensor_type: sensor
+        state_class: measurement
+      - device_class: current
+        icon: mdi:solar-power
+        name: Bms max charging current
+        register: bms_max_charging_current
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: current
+        icon: mdi:solar-power
+        name: Bms max discharging current
+        register: bms_max_discharging_current
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: power
+        icon: mdi:solar-power
+        name: Pv power of today
+        register: pv_power_of_today
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Daily PV energy yields
+        register: daily_pv_energy_yields
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Monthly PV energy yields
+        register: monthly_pv_energy_yields
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Yearly PV energy yields
+        register: yearly_pv_energy_yields
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: power
+        icon: mdi:solar-power
+        name: Direct power consumption today PV
+        register: direct_power_consumption_today_pv
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Direct power consumption PV
+        register: direct_power_consumption_pv
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Direct power consumption monthly PV
+        register: direct_power_consumption_monthly_pv
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Direct power consumption yearly PV
+        register: direct_power_consumption_yearly_pv
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: power
+        icon: mdi:solar-power
+        name: Export power from PV today
+        register: export_power_from_pv_today
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Export power from PV
+        register: export_power_from_pv
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Export power from PV monthly
+        register: export_power_from_pv_monthly
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Export power from PV yearly
+        register: export_power_from_pv_yearly
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy_storage
+        icon: mdi:solar-power
+        name: Battery charge power from PV today
+        register: battery_charge_power_from_pv_today
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy_storage
+        icon: mdi:solar-power
+        name: Battery charge power from PV
+        register: battery_charge_power_from_pv
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy_storage
+        icon: mdi:solar-power
+        name: Battery charge power from PV monthly
+        register: battery_charge_power_from_pv_monthly
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy_storage
+        icon: mdi:solar-power
+        name: Battery charge power from PV yearly
+        register: battery_charge_power_from_pv_yearly
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: System state
+        register: system_state
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Running state
+        register: running_state
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: State power generated from PV
+        register: state_power_generated_from_pv
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: State battery charging
+        register: state_battery_charging
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: State battery discharging
+        register: state_battery_discharging
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: State load active
+        register: state_load_active
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:transmission-tower
+        name: State feed into grid
+        register: state_feed_into_grid
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:transmission-tower-import
+        name: State import from grid
+        register: state_import_from_grid
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: State power generated from load
+        register: state_power_generated_from_load
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Daily PV generation
+        register: daily_pv_generation
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Total PV generation
+        register: total_pv_generation
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Daily PV export
+        register: daily_pv_export
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Total PV export
+        register: total_pv_export
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: power
+        icon: mdi:solar-power
+        name: Load power hybrid
+        register: load_power_hybrid
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: power
+        icon: mdi:solar-power
+        name: Export power hybrid
+        register: export_power_hybrid
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy_storage
+        icon: mdi:solar-power
+        name: Daily battery charge from PV
+        register: daily_battery_charge_from_pv
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy_storage
+        icon: mdi:solar-power
+        name: Total battery charge from PV
+        register: total_battery_charge_from_pv
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: weight
+        icon: mdi:solar-power
+        name: Co2 reduction
+        register: co2_reduction
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Daily direct energy consumption
+        register: daily_direct_energy_consumption
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Total direct energy consumption
+        register: total_direct_energy_consumption
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: volts
+        icon: mdi:solar-power
+        name: Battery voltage
+        register: battery_voltage
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: current
+        icon: mdi:solar-power
+        name: Battery current
+        register: battery_current
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: power
+        icon: mdi:solar-power
+        name: Battery power
+        register: battery_power
+        sensor_type: sensor
+        state_class: measurement
+      - device_class: battery
+        icon: mdi:solar-power
+        name: Battery level
+        register: battery_level
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: battery
+        icon: mdi:solar-power
+        name: Battery state of healthy
+        register: battery_state_of_healthy
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: temperature
+        icon: mdi:solar-power
+        name: Battery temperature
+        register: battery_temperature
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy_storage
+        icon: mdi:solar-power
+        name: Daily battery discharge energy
+        register: daily_battery_discharge_energy
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy_storage
+        icon: mdi:solar-power
+        name: Total battery discharge energy
+        register: total_battery_discharge_energy
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: battery
+        icon: mdi:solar-power
+        name: Self consumption of day
+        register: self_consumption_of_day
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Grid state
+        register: grid_state
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: current
+        icon: mdi:solar-power
+        name: Phase a current
+        register: phase_a_current
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: current
+        icon: mdi:solar-power
+        name: Phase b current
+        register: phase_b_current
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: current
+        icon: mdi:solar-power
+        name: Phase c current
+        register: phase_c_current
+        sensor_type: sensor
+        state_class: total_increasing
+      - name: "Active Generation"
+        sensor_type: sensor
+        register: total_active_power
+        dev_class: power
+        state_class: measurement
+        icon: "mdi:solar-power"
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Daily import energy
+        register: daily_import_energy
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Total import energy
+        register: total_import_energy
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Daily charge energy
+        register: daily_charge_energy
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Total charge energy
+        register: total_charge_energy
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Drm state
+        register: drm_state
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Daily export energy
+        register: daily_export_energy
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Total export energy
+        register: total_export_energy
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Year
+        register: year
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Month
+        register: month
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Day
+        register: day
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Hour
+        register: hour
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Minute
+        register: minute
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Second
+        register: second
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Start stop
+        register: start_stop
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Power limitation switch
+        register: power_limitation_switch
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: battery
+        icon: mdi:solar-power
+        name: Power limitation setting
+        register: power_limitation_setting
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Power factor setting
+        register: power_factor_setting
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: energy
+        icon: mdi:solar-power
+        name: Reactive power adjustment mode
+        register: reactive_power_adjustment_mode
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: battery
+        icon: mdi:solar-power
+        name: Reactive power percentage setting
+        register: reactive_power_percentage_setting
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: power
+        icon: mdi:solar-power
+        name: Power limitation adjustment
+        register: power_limitation_adjustment
+        sensor_type: sensor
+        state_class: total_increasing
+      - device_class: reactive_power
+        icon: mdi:solar-power
+        name: Reactive power adjustment
+        register: reactive_power_adjustment
+        sensor_type: sensor
+        state_class: total_increasing
+# Templated values - to investigate
       - name: "Daily Export to Grid"
         sensor_type: sensor
         register: daily_export_to_grid
@@ -37,7 +601,7 @@ exports:
         state_class: total_increasing
         icon: "mdi:transmission-tower-export"
         value_template: "{{ value_json.daily_export_to_grid | round(2) }}"
-        last_reset_value_template: "{{ value_json.last_reset }}"
+        last_reset_value_template: "{{ value1_json.last_reset }}"
       - name: "Daily Import from Grid"
         sensor_type: sensor
         register: daily_import_from_grid
@@ -46,23 +610,14 @@ exports:
         icon: "mdi:transmission-tower-import"
         value_template: "{{ value_json.daily_import_from_grid | round(2) }}"
         last_reset_value_template: "{{ value_json.last_reset }}"
-      - name: "Temperature"
-        sensor_type: sensor
-        register: internal_temperature
-        device_class: temperature
-        state_class: measurement
+# Where is this register?
       - name: "Power State"
         sensor_type: binary_sensor
         register: run_state
         device_class: running
         payload_on: "ON"
         payload_off: "OFF"
-      - name: "Active Generation"
-        sensor_type: sensor
-        register: total_active_power
-        dev_class: power
-        state_class: measurement
-        icon: "mdi:solar-power"
+# How is this calculated
       - name: "Active Export to Grid"
         sensor_type: sensor
         register: export_to_grid
